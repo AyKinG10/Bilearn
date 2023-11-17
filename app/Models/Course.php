@@ -11,4 +11,13 @@ class Course extends Model
 
     protected $fillable = ['Name','Description','Wallpaper','Videos','Price','category_id','user_id'];
 
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function comments(){
+        return $this->belongsTo(Comment::class);
+    }
 }

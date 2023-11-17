@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Bilearn') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -15,49 +15,64 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sss.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('https://unpkg.com/swiper@7/swiper-bundle.min.css') }}"/>
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<header class="header-area header-sticky" style="background-color: #12DE12">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="{{ url('/') }}" class="logo" style="font-size: 20px; text-decoration: none; color: white">
+                        {{ config('app.name', 'Bilearn') }}
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="{{ url('/') }}" class="active">Home</a></li>
+                        <li><a href="{{ url('/shop') }}">Our Shop</a></li>
+                        <li><a href="{{ url('/product-details') }}">Product Details</a></li>
+                        <li><a href="{{ url('/contact') }}">Contact Us</a></li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <li>
+                                    <a href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <li >
+                                    <a  href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <li >
+                                <a id="navbarDropdown"  href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a href="{{ route('index-profile') }}">Profile</a>
+                                    <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -68,13 +83,101 @@
                             </li>
                         @endguest
                     </ul>
-                </div>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
             </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+        </div>
     </div>
+</header>
+
+
+{{--<div id="app">--}}
+{{--    <header class="header-area header-sticky">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-12">--}}
+{{--                    <nav class="main-nav">--}}
+{{--                        <!-- ***** Logo Start ***** -->--}}
+{{--                        <a href="{{ url('/') }}" class="navbar-brand">--}}
+{{--                            {{ config('app.name', 'Laravel') }}--}}
+{{--                        </a>--}}
+{{--                        <!-- ***** Logo End ***** -->--}}
+{{--                        <!-- ***** Menu Start ***** -->--}}
+{{--                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">--}}
+{{--                            <span class="navbar-toggler-icon"></span>--}}
+{{--                        </button>--}}
+
+{{--                        <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
+{{--                            <!-- Left Side Of Navbar -->--}}
+{{--                            <ul class="navbar-nav me-auto">--}}
+
+{{--                            </ul>--}}
+
+{{--                            <!-- Right Side Of Navbar -->--}}
+{{--                            <ul class="navbar-nav ms-auto">--}}
+{{--                                <!-- Authentication Links -->--}}
+{{--                                @guest--}}
+{{--                                    @if (Route::has('login'))--}}
+{{--                                        <li class="nav-item">--}}
+{{--                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
+{{--                                        </li>--}}
+{{--                                    @endif--}}
+
+{{--                                    @if (Route::has('register'))--}}
+{{--                                        <li class="nav-item">--}}
+{{--                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
+{{--                                        </li>--}}
+{{--                                    @endif--}}
+{{--                                @else--}}
+{{--                                    <li class="nav-item dropdown">--}}
+{{--                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+{{--                                            {{ Auth::user()->name }}--}}
+{{--                                        </a>--}}
+
+{{--                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">--}}
+{{--                                            <a class="dropdown-item" href="{{ route('logout') }}"--}}
+{{--                                               onclick="event.preventDefault();--}}
+{{--                                                         document.getElementById('logout-form').submit();">--}}
+{{--                                                {{ __('Logout') }}--}}
+{{--                                            </a>--}}
+
+{{--                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
+{{--                                                @csrf--}}
+{{--                                            </form>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                @endguest--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                        <!-- ***** Menu End ***** -->--}}
+{{--                    </nav>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </header>--}}
+
+    <main class="py-4" style="background-color:#12DE12; ">
+        <br><br>
+    </main>
+
+    @yield('content')
+
+<footer>
+    <div class="container">
+        <div class="col-lg-12">
+            <p>Copyright © Bilearn Company. &nbsp;&nbsp;</p>
+        </div>
+    </div>
+</footer>
+
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/isotope.min.js')}}"></script>
+    <script src="{{asset('js/owl-carousel.js')}}"></script>
+    <script src="{{asset('js/counter.js')}}"></script>
+    <script src="{{asset('js/custom.js')}}"></script>
 </body>
 </html>
