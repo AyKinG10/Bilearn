@@ -51,7 +51,7 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        return view('courses.show',['courses'=>$course,'comment'=>Comment::all(),'categories'=>Category::all()]);
+        return view('courses.show',['courses'=>$course,'comments'=>Comment::all(),'categories'=>Category::all()]);
     }
 
 

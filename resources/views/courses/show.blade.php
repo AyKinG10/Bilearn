@@ -68,9 +68,32 @@
                         <hr class="my-4"> <!-- Добавлен разделитель -->
                         <!-- Секция комментариев -->
                         <div class="mt-4">
-                            <h3 class="comments-header">Comments</h3>
-                            <!-- Добавьте здесь код для отображения комментариев -->
+                            <div class="container mt-5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Add a Comment</h5>
+                                        <form class="form-group" action="{{route('comments.store')}}" method="post">
+                                            @csrf
+                                            <textarea class="form-control" rows="4" name="content" placeholder="Type your comment here..."></textarea>
+                                            <input type="hidden" value="{{$courses->id}}" name="course_id">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <ul class="list-group">
+                                @foreach($comments as $comment)
+                                    <li class="list-group-item">
+                                        <p>{{$comment->content}}</p>
+                                        <p>{{$comment->user->name}}</p>
+                                    </li>
+                                <form action="{{route('comments.destroy',$comment->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-primary" type="submit">DELETE</button>
+                                </form>
+                            @endforeach
                     </div>
                 </div>
             </div>

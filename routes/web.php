@@ -22,3 +22,4 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/courses/category/{category}',[CourseController::class, 'coursesByCat'])->name('course.category');
 Route::resource('courses',CourseController::class);
 Route::resource('categories',CategoryController::class);
+Route::resource('comments', CommentController::class);

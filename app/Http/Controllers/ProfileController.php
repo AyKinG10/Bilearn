@@ -32,7 +32,7 @@ class ProfileController extends Controller
                 $user->name = $request->input('name');
                 $user->email = $request->input('email');
 
-                // Обработка фото профиля, если оно загружено
+                // Обработка фото профил    я, если оно загружено
                 if ($request->hasFile('profImg')) {
                     $photoPath = $request->file('profImg')->store('profile-photos', 'public');
                     $user->profImg= $photoPath;

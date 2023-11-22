@@ -87,7 +87,7 @@
                     <div class="item">
                         <a href="{{route('course.category',$cat->id)}}"><h4>{{$cat->Name_kz}}</h4></a>
                         <div class="thumb">
-                            <a href="{{route('course.category',$cat->id)}}"><img src="{{$cat->catImg}}" height="300 " width="200" alt="...."></a>
+                            <a href="{{route('course.category',$cat->id)}}"><img src="{{$cat->catImg}}" height="250" alt="...."></a>
                         </div>
                     </div>
                 </div>
@@ -124,22 +124,5 @@
             </div>
         </div>
     </div>
-{{--        --}}
-{{--            <div class="container">--}}
-{{--            <div class="row">--}}
-{{--                @foreach($courses as $course)--}}
-{{--                    <div class="col-sm-4">--}}
-{{--                        <div class="card">--}}
-{{--                            <div class="card-body text-center">--}}
-{{--                                <img class="card-img-top" src="{{asset($course->Wallpaper)}}" width="100px" height="300px" alt="Card image cap">--}}
-{{--                                <br><br>--}}
-{{--                                <h2 class="card-title">{{$course->Name}}</h2>--}}
-{{--                                <h5 class="card-title" align="center">Price:{{$course->Price}}$</h5>--}}
-{{--                                <a href="{{route('courses.show',$course->id)}}" class="btn btn-primary">Read More</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
-{{--        </div>--}}
+
 @endsection

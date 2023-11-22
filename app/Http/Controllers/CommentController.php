@@ -17,7 +17,9 @@ class CommentController extends Controller
         Auth::user()->comments()->create($validated);
         return back()->with("Comments is created sucsessfully");
     }
+    public function index(){
 
+    }
     public function edit(Comment $comment){
         return view('comment.edit',['comment'=>$comment,'categories'=>Category::all()]);
     }
