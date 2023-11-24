@@ -83,6 +83,7 @@
                             </div>
                         </div>
                         <ul class="list-group">
+                            <li class="row">
                                 @foreach($comments as $comment)
                                     <li class="list-group-item">
                                         <p>{{$comment->content}}</p>
@@ -94,6 +95,7 @@
                                     <button class="btn btn-primary" type="submit">DELETE</button>
                                 </form>
                             @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
