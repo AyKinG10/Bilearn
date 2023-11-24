@@ -18,8 +18,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth'])->group(function () {
     Route::post('/profile/update', [ProfileController::class,'update'])->name('update-profile');
     Route::get('/profile',[ProfileController::class,'index'])->name('index-profile');
+    Route::resource('comments',CommentController::class)->only('store','edit','update','destroy');
+    Route::resource('courses',CourseController::class)->except('index', 'show');
+    Route::get('/courses/favorites',[CourseController::class, 'favorites'])->name('courses.favorite');
+    Route::post('/courses/{course}/courseLike',[CourseController::class,'courseLike'])->name('course.like');
 });
 Route::get('/courses/category/{category}',[CourseController::class, 'coursesByCat'])->name('course.category');
 Route::resource('courses',CourseController::class);
 Route::resource('categories',CategoryController::class);
-Route::resource('comments', CommentController::class);
+
+

@@ -11,10 +11,14 @@ use Illuminate\Support\Facades\Auth;
 class CourseController extends Controller
 {
 
+    public function favorites(){
+        $fav=Auth::user()->coursesLiked()->get();
+        return view('courses.favorite',['courses'=>$fav,'categories'=>Category::all()]);
+    }
     public function index()
     {
-        $allProducts = Course::all();
-        return view('courses.index',['courses'=>$allProducts,'categories'=>Category::all()]);
+        $allCourses = Course::all();
+        return view('courses.index',['courses'=>$allCourses,'categories'=>Category::all()]);
     }
 
     public function coursesByCat(Category $category)
@@ -78,5 +82,17 @@ class CourseController extends Controller
     {
         $course->delete();
         return redirect(route('courses.index'))->with('message','Products deleted sucsessfully');
+    }
+    public function courseLike(Course $course)
+    {
+        $likedCourse = Auth::user()->coursesLiked()->where('course_id', $course->id)->first();
+
+        if ($likedCourse != null) {
+            Auth::user()->coursesLiked()->detach($course->id);
+        } else {
+            Auth::user()->coursesLiked()->attach($course->id);
+        }
+
+        return redirect(route('courses.favorite', $course->id));
     }
 }

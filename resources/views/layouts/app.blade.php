@@ -45,10 +45,15 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="{{ url('/') }}" class="active">Home</a></li>
-                        <li><a href="{{ url('/shop') }}">Our Shop</a></li>
-                        <li><a href="{{ url('/product-details') }}">Product Details</a></li>
-                        <li><a href="{{ url('/contact') }}">Contact Us</a></li>
+                        <li>
+                            <a href="{{route('courses.index')}}">All Courses</a>
+                        </li>
+                        <li>
+                            <a href="{{route('courses.create')}}">Create product</a>
+                        </li>
+                        <li>
+                            <a href="{{route('courses.favorite')}}">My favorites</a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -92,73 +97,6 @@
         </div>
     </div>
 </header>
-
-
-{{--<div id="app">--}}
-{{--    <header class="header-area header-sticky">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-12">--}}
-{{--                    <nav class="main-nav">--}}
-{{--                        <!-- ***** Logo Start ***** -->--}}
-{{--                        <a href="{{ url('/') }}" class="navbar-brand">--}}
-{{--                            {{ config('app.name', 'Laravel') }}--}}
-{{--                        </a>--}}
-{{--                        <!-- ***** Logo End ***** -->--}}
-{{--                        <!-- ***** Menu Start ***** -->--}}
-{{--                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">--}}
-{{--                            <span class="navbar-toggler-icon"></span>--}}
-{{--                        </button>--}}
-
-{{--                        <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
-{{--                            <!-- Left Side Of Navbar -->--}}
-{{--                            <ul class="navbar-nav me-auto">--}}
-
-{{--                            </ul>--}}
-
-{{--                            <!-- Right Side Of Navbar -->--}}
-{{--                            <ul class="navbar-nav ms-auto">--}}
-{{--                                <!-- Authentication Links -->--}}
-{{--                                @guest--}}
-{{--                                    @if (Route::has('login'))--}}
-{{--                                        <li class="nav-item">--}}
-{{--                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
-{{--                                        </li>--}}
-{{--                                    @endif--}}
-
-{{--                                    @if (Route::has('register'))--}}
-{{--                                        <li class="nav-item">--}}
-{{--                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
-{{--                                        </li>--}}
-{{--                                    @endif--}}
-{{--                                @else--}}
-{{--                                    <li class="nav-item dropdown">--}}
-{{--                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-{{--                                            {{ Auth::user()->name }}--}}
-{{--                                        </a>--}}
-
-{{--                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">--}}
-{{--                                            <a class="dropdown-item" href="{{ route('logout') }}"--}}
-{{--                                               onclick="event.preventDefault();--}}
-{{--                                                         document.getElementById('logout-form').submit();">--}}
-{{--                                                {{ __('Logout') }}--}}
-{{--                                            </a>--}}
-
-{{--                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
-{{--                                                @csrf--}}
-{{--                                            </form>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                @endguest--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                        <!-- ***** Menu End ***** -->--}}
-{{--                    </nav>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </header>--}}
-
     <main class="py-4" style="background-color:#12DE12; ">
         <br><br>
     </main>

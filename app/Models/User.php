@@ -39,4 +39,8 @@ class User extends Authenticatable
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+    public function coursesLiked(){
+        return $this->belongsToMany(Course::class,'user_course')
+            ->withTimestamps();
+    }
 }
