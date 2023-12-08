@@ -21,8 +21,13 @@
                                     <!-- Описание курса -->
                                     <article>
                                         <p class="text-justify">{{ $courses->Description }}</p>
-                                    </article><a href="{{ route('courses.edit', [$courses->id]) }}" class="btn btn-primary">Edit</a>
+                                    </article>
+                                    <div class="mt-2">
+                                        <a href="{{ route('chat', $teacher) }}">{{ $teacher->name }}</a>
+                                    </div>
+                                    <a href="{{ route('courses.edit', [$courses->id]) }}" class="b  tn btn-primary">Edit</a>
                                 </div>
+                                <a href="{{ route('lesson.create', [$courses->id]) }}" class="btn btn-primary">Create</a>
                             </div>
                             <form action="{{ route('courses.destroy', $courses->id) }}" method="post">
                                 @method('delete')
@@ -44,14 +49,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <!-- Пример элемента плейлиста -->
+                                    @foreach($lessons as $lesson)
+
                                     <tr>
-                                        <td>1</td>
-                                        <td>Video 1</td>
+                                        <td><a href="">{{ $lesson->id }}</a></td>
+                                        <td>{{ $lesson->title }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-link">Play</button>
+                                            <a href="{{route('courses.show',$courses->id)}}" class="btn btn-link">Play</a>
                                         </td>
                                     </tr>
+                                    @endforeach
                                     <!-- Добавьте здесь другие элементы плейлиста -->
                                     </tbody>
                                 </table>
@@ -59,10 +66,14 @@
                             <!-- Видео-плеер (правая часть) -->
                             <div class="col-md-8">
                                 <h3 class="player-header">Video Player</h3>
+                                @foreach($lessons as $lesson)
+                                    @if($lesson->id == 1)
                                 <video controls width="100%">
-                                    <source src="{{ asset($courses->Videos) }}" type="video/mp4">
+                                    <source src="{{ asset($lesson->video) }}" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                         <hr class="my-4"> <!-- Добавлен разделитель -->

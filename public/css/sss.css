@@ -120,12 +120,12 @@ body {
 }
 
 ::selection {
-  background: #0071f8;
+  background: #1e9c4a;
   color: #fff;
 }
 
 ::-moz-selection {
-  background: #0071f8;
+  background: #1e9c4a;
   color: #fff;
 }
 
@@ -147,7 +147,7 @@ body {
 
 .section-heading h2 em {
   font-style: normal;
-  color: #0071f8;
+  color: #1e9c4a;
 }
 
 .section-heading h6 {
@@ -172,7 +172,7 @@ body {
 }
 
 .main-button a:hover {
-  background-color: #0071f8;
+  background-color: #1e9c4a;
   color: #fff;
 }
 
@@ -249,7 +249,7 @@ Pre-loader Style
   height: 16px;
   top: 12px;
   left: 15px;
-  background: #0071f8;
+  background: #1e9c4a;
   border-radius: 50%;
   -webkit-transform: translateX(0);
   transform: translateX(0);
@@ -272,7 +272,7 @@ Pre-loader Style
   width: 16px;
   height: 16px;
   margin-left: 16px;
-  background: #0071f8;
+  background: #1e9c4a;
   border-radius: 50%;
 }
 
@@ -285,7 +285,7 @@ Header Style
 */
 
 .background-header {
-  background-color: #12DE12 !important;
+  background-color: #1e9c4a !important;
   border-radius: 0px 0px 25px 25px;
   height: 80px!important;
   position: fixed!important;
@@ -387,7 +387,7 @@ Header Style
 }
 
 .header-area .main-nav .nav li:last-child a {
-  background-color: #ee626b;
+  background-color: #dc151c;
   text-transform: uppercase;
   font-weight: 500;
 }
@@ -651,7 +651,7 @@ Banner Style
 */
 
 .main-banner {
-  background-color: #12DE12;
+  background-color: #1e9c4a;
   border-radius: 0px 0px 150px 150px;
   background-position: center bottom;
   background-repeat: no-repeat;
@@ -660,7 +660,7 @@ Banner Style
 }
 
 .main-banner .caption h6 {
-  font-size: 20px;
+  font-size: 30px;
   text-transform: uppercase;
   color: #fff;
   font-weight: 500;
@@ -728,7 +728,7 @@ Banner Style
 }
 
 .main-banner .caption form button:hover {
-  background-color: #0071f8;
+  background-color: #1e9c4a;
 }
 
 .main-banner .right-image {
@@ -801,7 +801,7 @@ Services Style
   display: inline-block;
   text-align: center;
   line-height: 90px;
-  background-color: #12DE12;
+  background-color: #1e9c4a;
   border-radius: 50%;
   transition: all .3s;
 }
@@ -892,11 +892,11 @@ Trending Style
 }
 
 .trending .item:hover .down-content h4 {
-  color: #0071f8;
+  color: #1e9c4a;
 }
 
 .trending .item:hover .down-content a {
-  background-color: #0071f8;
+  background-color: #1e9c4a;
 }
 
 
@@ -968,11 +968,11 @@ Most Played Style
 }
 
 .most-played .item:hover .down-content h4 {
-  color: #0071f8;
+  color: #1e9c4a;
 }
 
 .most-played .item:hover .down-content a {
-  background-color: #0071f8;
+  background-color: #1e9c4a;
 }
 
 
@@ -987,7 +987,7 @@ Categories Style
 }
 
 .categories .item  {
-  background-color: #12DE12;
+  background-color: #1e9c4a;
   position: relative;
   border-radius: 25px;
   text-align: center;
@@ -1101,7 +1101,7 @@ CTA Style
 }
 
 .cta .subscribe form button:hover {
-  background-color: #0071f8;
+  background-color: #1e9c4a;
 }
 
 
@@ -1112,12 +1112,12 @@ Footer Style
 */
 
 footer {
-  margin-top: 150px;
-  background-color: #12DE12;
+  margin-top: 470px;
+  background-color: #1e9c4a;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 150px;
-  border-radius: 150px 150px 0px 0px;
+  border-radius: 80px 80px 0px 0px;
 }
 
 footer p {
@@ -1288,11 +1288,11 @@ Shop Page Style
 }
 
 .trending-box .item:hover .down-content h4 {
-  color: #0071f8;
+  color: #1e9c4a;
 }
 
 .trending-box .item:hover .down-content a {
-  background-color: #0071f8;
+  background-color: #1e9c4a;
 }
 
 .trending ul.pagination {
@@ -1323,7 +1323,7 @@ Shop Page Style
 
 .trending ul.pagination li a:hover,
 .trending ul.pagination li a.is_active {
-  background-color: #0071f8;
+  background-color: #1e9c4a;
   color: #fff;
 }
 
@@ -1357,7 +1357,7 @@ Single Page Style
 .single-product span.price {
   font-size: 27px;
   font-weight: 700;
-  color: #0071f8;
+  color: #1e9c4a;
 }
 
 .single-product span.price em {
@@ -1409,7 +1409,7 @@ Single Page Style
 }
 
 .single-product form button:hover {
-  background-color: #0071f8;
+  background-color: #1e9c4a;
 }
 
 .single-product ul {
@@ -1420,7 +1420,7 @@ Single Page Style
   display: block;
   margin: 20px 0px;
   font-size: 14px;
-  color: #0071f8;
+  color: #1e9c4a;
 }
 
 .single-product ul li:last-child {
@@ -1467,7 +1467,7 @@ Single Page Style
 }
 
 .tabs-content .nav-tabs .nav-link.active {
-  color: #0071f8;
+  color: #1e9c4a;
 }
 
 .tabs-content .tab-content {
@@ -1568,7 +1568,7 @@ Contact PAge Style
 }
 
 .contact-page .right-content form button:hover {
-  background-color: #0071f8;
+  background-color: #1e9c4a;
 }
 
 /*

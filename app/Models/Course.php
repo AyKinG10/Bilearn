@@ -9,13 +9,13 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Name','Description','Wallpaper','Videos','Price','category_id','user_id'];
+    protected $fillable = ['Name','Description','Wallpaper','Videos','Price','category_id','user_id', 'teacher_id'];
 
     public function category(){
         return $this->belongsTo(Category::class);
     }
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
     public function comments(){
         return $this->belongsTo(Comment::class);
@@ -23,5 +23,9 @@ class Course extends Model
     public function usersLiked(){
         return $this->belongsToMany(User::class,'user_course')
             ->withTimestamps();
+    }
+
+    public function lessons(){
+        return $this->belongsTo(Lesson::class);
     }
 }

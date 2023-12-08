@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Course;
+use App\Models\Lesson;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +30,9 @@ class CourseController extends Controller
 
     public function create()
     {
-        return view('courses.create',['categories'=>Category::all()]);
+        $this->authorize('create', Course::class);
+        $teachers = User::where('role_id', '=', 4)->get();
+        return view('courses.create',['categories'=>Category::all(), 'teachers' => $teachers]);
     }
 
 
@@ -38,24 +42,22 @@ class CourseController extends Controller
             'Name' => 'required|max:255',
             'Wallpaper'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=50,min_height=50',
             'Description'=>'required',
-            'Videos'=>'required',
             'Price' => 'required|numeric',
-            'category_id' => 'required|numeric|exists:categories,id'
+            'category_id' => 'required|numeric|exists:categories,id',
+            'teacher_id' => 'numeric|exists:users,id'
         ]);
         $fileName=time().$request->file('Wallpaper')->getClientOriginalName();
         $image_path = $request->file('Wallpaper')->storeAs('courses',$fileName,'public');
         $validated['Wallpaper'] = '/storage/'.$image_path;
-
-        $videoFileName = time() . $request->file('Videos')->getClientOriginalName();
-        $video_path = $request->file('Videos')->storeAs('videos', $videoFileName, 'public');
-        $validated['Videos'] = '/storage/' . $video_path;
         Auth::user()->courses()->create($validated);
         return redirect(route('courses.index'))->with('message','Successfully');
     }
 
-    public function show(Course $course)
+    public function show(Course $course, Lesson $lesson)
     {
-        return view('courses.show',['courses'=>$course,'comments'=>Comment::all(),'categories'=>Category::all()]);
+        $teacher = User::where('id', '=', $course->teacher_id)->first();
+        $lessons = Lesson::where('course_id', '=', $course->id)->get();
+        return view('courses.show',['courses'=>$course,'comments'=>Comment::all(),'lessons'=>$lessons,'lesson_id' => $lesson,'categories'=>Category::all(), 'teacher' => $teacher]);
     }
 
 
@@ -70,7 +72,6 @@ class CourseController extends Controller
             'Name'=>$request->input('Name'),
             'Wallpaper'=>$request->input('Wallpaper'),
             'Description'=>$request->input('Description'),
-            'Videos'=>$request->input('Videos'),
             'Price'=>$request->input('Price'),
             'category_id'=>$request->category_id,
         ]);

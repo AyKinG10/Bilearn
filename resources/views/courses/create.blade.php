@@ -27,7 +27,7 @@
                         <div class="alert alert-danger ">{{ $message }}</div>
                         @enderror
                         <br>
-                        <input type="number" name="Price" class="form-control @error('Price') is-invalid @enderror" placeholder="Price">
+                        <input name="Price" class="form-control @error('Price') is-invalid @enderror" placeholder="Price">
                         @error('Price')
                         <div class="alert alert-danger ">{{ $message }}</div>
                         @enderror
@@ -42,6 +42,13 @@
                         @error('Videos')
                         <div class="alert alert-danger">{{$message}}</div>
                         @enderror
+                        <br>
+                        <label for="teacher">Автор</label>
+                        <select name="teacher_id" class="form-control">
+                            @foreach($teachers as $teacher)
+                                <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button class="btn btn-primary form-control"  style="margin-top: 20px"  type="submit">Save</button>
                 </div>

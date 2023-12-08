@@ -21,6 +21,39 @@
     <link rel="stylesheet" href="{{ asset('css/owl.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('https://unpkg.com/swiper@7/swiper-bundle.min.css') }}"/>
+
+    <style>/* public/css/app.css */
+
+        .chat-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .message-link {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .message {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .sender-name {
+            font-weight: bold;
+        }
+
+        .message-content {
+            margin-top: 5px;
+        }
+
+        .sent-at {
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
 <div id="js-preloader" class="js-preloader">
@@ -33,13 +66,13 @@
         </div>
     </div>
 </div>
-<header class="header-area header-sticky" style="background-color: #12DE12">
+<header class="header-area header-sticky" style="background-color: #1e9c4a">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="{{ url('/') }}" class="logo" style="font-size: 20px; text-decoration: none; color: white">
+                    <a href="{{ url('/') }}" class="logo" style="font-size: 40px; text-decoration: none; color: white">
                         {{ config('app.name', 'Bilearn') }}
                     </a>
                     <!-- ***** Logo End ***** -->
@@ -48,11 +81,30 @@
                         <li>
                             <a href="{{route('courses.index')}}">All Courses</a>
                         </li>
+                        @can('create',\App\Models\Course::class)
                         <li>
                             <a href="{{route('courses.create')}}">Create product</a>
                         </li>
+                        @endcan
                         <li>
                             <a href="{{route('courses.favorite')}}">My favorites</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('question.index') }}">Questions</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('chat.index') }}">My chats</a>
+                        </li>
+                        <li >
+                            <a id="navbarDropdown"  href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                KZ
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a href="#" style="color: #1a1d20">KZ</a>
+                                <a href="#" style="color: #1a1d20">RU</a>
+                                <a href="#" style="color: #1a1d20">EN</a>
+                            </div>
                         </li>
                         <!-- Authentication Links -->
                         @guest
@@ -97,7 +149,7 @@
         </div>
     </div>
 </header>
-    <main class="py-4" style="background-color:#12DE12; ">
+    <main class="py-4" style="background-color:#1e9c4a ">
         <br><br>
     </main>
 
@@ -110,7 +162,7 @@
         </div>
     </div>
 </footer>
-
+    <script src="{{asset('https://code.jquery.com/jquery-3.6.4.min.js')}}"></script>
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/isotope.min.js')}}"></script>
