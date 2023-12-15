@@ -15,6 +15,7 @@ class CourseController extends Controller
 
     public function favorites(){
         $fav=Auth::user()->coursesLiked()->get();
+
         return view('courses.favorite',['courses'=>$fav,'categories'=>Category::all()]);
     }
     public function index()
@@ -57,7 +58,8 @@ class CourseController extends Controller
     {
         $teacher = User::where('id', '=', $course->teacher_id)->first();
         $lessons = Lesson::where('course_id', '=', $course->id)->get();
-        return view('courses.show',['courses'=>$course,'comments'=>Comment::all(),'lessons'=>$lessons,'lesson_id' => $lesson,'categories'=>Category::all(), 'teacher' => $teacher]);
+        $comments = Comment::where('course_id' ,'=', $course->id)->get();
+        return view('courses.show',['courses'=>$course,'comments'=>$comments,'lessons'=>$lessons,'lesson_id' => $lesson,'categories'=>Category::all(), 'teacher' => $teacher]);
     }
 
 
@@ -86,7 +88,7 @@ class CourseController extends Controller
     }
     public function courseLike(Course $course)
     {
-        $likedCourse = Auth::user()->coursesLiked()->where('course_id', $course->id)->first();
+        $likedCourse = Auth::user()->coursesLiked()->where('course_id', $course->id)->get();
 
         if ($likedCourse != null) {
             Auth::user()->coursesLiked()->detach($course->id);

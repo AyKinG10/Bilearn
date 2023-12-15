@@ -10,6 +10,7 @@
         <div class="row">
             @foreach($q as $qu)
                 <div class="col-md-4 mb-4">
+                    <a href="{{route('question.show',$qu->id)}}">
                     <div class="card h-100">
                         @if($qu->image)
                             <img src="{{ asset($qu->image) }}" alt="Question Image" class="card-img-top">
@@ -22,6 +23,7 @@
                             <small class="text-muted">{{ $qu->user->name }}</small>
                         </div>
                     </div>
+                    </a>
                 </div>
             @endforeach
         </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
+use App\Models\Category;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +27,6 @@ class QuestionController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
-            'user_id' => 'required|numeric',
             'image'=>'required|mimes:jpg,png,jpeg,svg,gif,mp4'
         ]);
         $fileName = time().$request->file('image')->getClientOriginalName();
@@ -39,9 +40,11 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Question $question)
     {
-        //
+        $answers = Answer::where('question_id','=',$question->id)->get();
+        return view('question.show',['question'=>$question,'answers' => $answers]);
+
     }
 
     /**
@@ -63,8 +66,10 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Question $question)
     {
-        //
+
+        $question->delete();
+        return redirect(route('question.index'))->with('message','Questions deleted sucsessfully');
     }
 }

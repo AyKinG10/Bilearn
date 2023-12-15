@@ -55,7 +55,7 @@
                                         <td><a href="">{{ $lesson->id }}</a></td>
                                         <td>{{ $lesson->title }}</td>
                                         <td>
-                                            <a href="{{route('courses.show',$courses->id)}}" class="btn btn-link">Play</a>
+                                            <a href="#" class="btn btn-link play-lesson" data-video="{{ asset($lesson->video) }}">Play</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -65,15 +65,13 @@
                             </div>
                             <!-- Видео-плеер (правая часть) -->
                             <div class="col-md-8">
-                                <h3 class="player-header">Video Player</h3>
-                                @foreach($lessons as $lesson)
-                                    @if($lesson->id == 1)
-                                <video controls width="100%">
-                                    <source src="{{ asset($lesson->video) }}" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                    @endif
-                                @endforeach
+
+                                    <h3 class="player-header">Video Player</h3>
+                                    <video id="videoPlayer" controls width="100%">
+                                        <source src="" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+
                             </div>
                         </div>
                         <hr class="my-4"> <!-- Добавлен разделитель -->
@@ -112,4 +110,23 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var playButtons = document.querySelectorAll('.play-lesson');
+
+            playButtons.forEach(function(button) {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+
+                    var videoUrl = this.getAttribute('data-video');
+                    var videoPlayer = document.getElementById('videoPlayer');
+
+                    // Обновляем источник видео и воспроизводим
+                    videoPlayer.src = videoUrl;
+                    videoPlayer.load();
+                    videoPlayer.play();
+                });
+            });
+        });
+    </script>
 @endsection
