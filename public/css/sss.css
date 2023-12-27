@@ -387,13 +387,15 @@ Header Style
 }
 
 .header-area .main-nav .nav li:last-child a {
-  background-color: #dc151c;
-  text-transform: uppercase;
   font-weight: 500;
+    align-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .header-area .main-nav .nav li:last-child:hover a {
-  background-color: #ee626b;
+    color: black;
+    font-family: 'Poppins', sans-serif;
 }
 
 .header-area .main-nav .nav li:hover a {

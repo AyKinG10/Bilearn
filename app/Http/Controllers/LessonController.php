@@ -44,7 +44,7 @@ class LessonController extends Controller
         $validated['video'] = '/storage/' . $video_path;
 
         Lesson::create($validated);
-        return back()->with('message','Successfully');
+        return redirect(route('courses  .index'))->with('message','Successfully');
     }
 
     public function show(Lesson $lesson)

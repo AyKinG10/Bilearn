@@ -1,36 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{route('lesson.store')}}" method="post" enctype="multipart/form-data">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Create Lesson</h2>
 
-        @csrf
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-5">
+                        <form action="{{ route('lesson.store') }}" method="post" enctype="multipart/form-data">
+                            @csrf
 
-                    <div class="form-group" style="margin-top: 10px;">
-                        <label for="nameInput" class="form-control">Lesson Title</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Name">
-                        @error('name')
-                        <div class="alert alert-danger ">{{ $message  }}</div>
-                        @enderror <br>
-                        <label for="descInput" class="form-control">Description</label>
-                        <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" placeholder="Description">
-                        @error('description')
-                        <div class="alert alert-danger ">{{ $message }}</div>
-                        @enderror
-                        <br>
-                        <label for="videoInput" class="form-control">Video</label>
-                        <input type="file" class="form-control @error('video') is-invalid @enderror"  id="videosInput" name="video">
-                        @error('video')
-                        <div class="alert alert-danger">{{$message}}</div>
-                        @enderror
-                        <br>
+                            <div class="mb-3">
+                                <label for="nameInput" class="form-label">Lesson Title</label>
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Lesson Title">
+                                @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="descInput" class="form-label">Description</label>
+                                <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" placeholder="Enter Description">
+                                @error('description')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="videoInput" class="form-label">Video</label>
+                                <input type="file" class="form-control-file @error('video') is-invalid @enderror" id="videosInput" name="video">
+                                @error('video')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <button class="btn btn-primary btn-block" type="submit">Save</button>
+                        </form>
                     </div>
-                    <button class="btn btn-primary form-control"  style="margin-top: 20px"  type="submit">Save</button>
                 </div>
             </div>
         </div>
-
-    </form>
+    </div>
 @endsection

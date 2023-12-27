@@ -11,10 +11,10 @@ class CategoryController extends Controller
 
     public function index(){
         $categories= Category::all();
-        return view('categories.index',['categories'=>$categories]);
+        return view('adm.categories.index',['categories'=>$categories]);
     }
     public function create(){
-        return view('categories.create',['categories'=>Category::all()]);
+        return view('adm.categories.create',['categories'=>Category::all()]);
     }
     public function store(Request $request){
         $validated = $request->validate([
@@ -27,10 +27,10 @@ class CategoryController extends Controller
         $image_path = $request->file('catImg')->storeAs('categories',$fileName,'public');
         $validated['catImg'] = '/storage/'.$image_path;
         Category::create($validated);
-        return redirect()->route('categories.index',['categories'=>Category::all()])->with('Successfully','Added a new category');
+        return redirect()->route('adm.categories.index',['categories'=>Category::all()])->with('Successfully','Added a new category');
     }
     public function destroy(Category $category){
         $category->delete();
-        return redirect()->route('categories.index');
+        return redirect()->route('adm.categories.index');
     }
 }

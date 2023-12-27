@@ -21,9 +21,18 @@
     <link rel="stylesheet" href="{{ asset('css/owl.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('https://unpkg.com/swiper@7/swiper-bundle.min.css') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 
     <style>/* public/css/app.css */
-
+        body{
+            background-image: url("https://t4.ftcdn.net/jpg/01/23/73/15/360_F_123731572_KMfBEkpbRlfQj1ypdPVwv4W0r27B9hVJ.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
         .chat-container {
             max-width: 600px;
             margin: auto;
@@ -79,44 +88,51 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li>
-                            <a href="{{route('courses.index')}}">All Courses</a>
+                            <a href="{{route('courses.index')}}">Барлық курстар</a>
                         </li>
+                        @can('view',\App\Models\Course::class)
+                            <li>
+                                <a href="{{route('courses.purchased')}}">Менің Курстарым</a>
+                            </li>
+                        @endcan
                         @can('create',\App\Models\Course::class)
                         <li>
-                            <a href="{{route('courses.create')}}">Create product</a>
+                            <a href="{{route('courses.create')}}">Курс қосу</a>
                         </li>
                         @endcan
+                        @can('view',\App\Models\Course::class)
                         <li>
-                            <a href="{{route('courses.favorite')}}">My favorites</a>
+                            <a href="{{route('courses.favorite')}}">Таңдаулылар</a>
                         </li>
-                        <li>
-                            <a href="{{ route('question.index') }}">Questions</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('chat.index') }}">My chats</a>
-                        </li>
-                        <li >
-                            <a id="navbarDropdown"  href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                KZ
+                        @endcan
+                        <li class="nav-item dropdown">
+                            <a class= href="#" id="navbarDropdownMore" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Қосымша
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+                                </svg>
                             </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a href="#" style="color: #1a1d20">KZ</a>
-                                <a href="#" style="color: #1a1d20">RU</a>
-                                <a href="#" style="color: #1a1d20">EN</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMore">
+                                <a class="dropdown-item" style="color: black" href="{{ route('questions.index') }}">Сұрақ-жауап</a>
+                                <a class="dropdown-item" style="color: black" href="{{ route('game') }}">Ойын</a>
+                                <!-- Дополнительные подпункты, если необходимо -->
                             </div>
                         </li>
+                        <li>
+                            <a href="{{ route('chat.index') }}">Хабарлама</a>
+                        </li>
+
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li>
-                                    <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a href="{{ route('login') }}">{{ __('Кіру') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li >
-                                    <a  href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a  href="{{ route('register') }}">{{ __('Тіркелу') }}</a>
                                 </li>
                             @endif
                         @else
@@ -126,11 +142,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a href="{{ route('index-profile') }}">Profile</a>
+                                    <a href="{{ route('index-profile') }}">Профиль</a>
+                                    @can('viewAny',\App\Models\Course::class)
+                                    <a href="{{ route('adm.users.index') }}">Admin Panel</a>
+                                    @endcan
                                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Шығу') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -140,9 +159,7 @@
                             </li>
                         @endguest
                     </ul>
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
+
                     <!-- ***** Menu End ***** -->
                 </nav>
             </div>
@@ -158,7 +175,7 @@
 <footer>
     <div class="container">
         <div class="col-lg-12">
-            <p>Copyright © Bilearn Company. &nbsp;&nbsp;</p>
+            <p>Авторлық құқық © Bilearn компаниясы. &nbsp;&nbsp;</p>
         </div>
     </div>
 </footer>

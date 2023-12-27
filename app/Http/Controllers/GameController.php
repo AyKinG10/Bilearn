@@ -7,6 +7,23 @@ use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
+    public function create()
+    {
+        return view('games.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'question' => 'required|string',
+            'answer' => 'required|text',
+        ]);
+
+        $question = Game::create($validatedData);
+
+        // Redirect to the show page for the new question
+        return redirect()->route('games.index', ['question' => $question->id]);
+    }
     public function index()
     {
         $questions = Game::all();
@@ -22,9 +39,14 @@ class GameController extends Controller
     {
         $userAnswer = $request->input('answer');
         $correctAnswer = $question->answer;
-        $id = $question->id+1;
 
+        // Find the next question
+        $nextQuestion = Game::find($question->id + 1);
 
-        return view('games.gameresult', compact('question', 'userAnswer', 'correctAnswer','id'));
+        // Check if the next question exists
+        $id = $nextQuestion ? $nextQuestion->id : null;
+
+        return view('games.gameresult', compact('question', 'userAnswer', 'correctAnswer', 'id'));
     }
+
 }

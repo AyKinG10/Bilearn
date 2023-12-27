@@ -33,7 +33,7 @@ class QuestionController extends Controller
         $image_path = $request->file('image')->storeAs('questions',$fileName,'public');
         $validated['image']='/storage/'.$image_path;
         Auth::user()->questions()->create($validated);
-        return redirect()->route('question.index')->with('message', 'Question Added Successfully');
+        return redirect()->route('questions.index')->with('message', 'Question Added Successfully');
 
     }
 

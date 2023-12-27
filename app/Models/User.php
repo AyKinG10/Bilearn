@@ -53,6 +53,12 @@ class User extends Authenticatable
     }
 
 
+    public function coursesPurchased(){
+        return $this->belongsToMany(Course::class, 'paids')
+            ->withPivot('status') // чтобы получить статус оплаты
+            ->wherePivot('status', true); // фильтр только для оплаченных курсов
+    }
+
     public function answers(){
         return $this->hasMany(Answer::class);
     }

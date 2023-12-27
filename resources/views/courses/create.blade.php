@@ -1,59 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{route('courses.store')}}" method="post" enctype="multipart/form-data">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow p-4">
+                    <h2 class="text-center mb-4">Жаңа курсты Қосу</h2>
 
-        @csrf
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-5">
+                    <form  action="{{ route('courses.store') }}" method="post" enctype="multipart/form-data">
 
-                    <div class="form-group" style="margin-top: 10px;">
-
-                        <input type="text" name="Name" class="form-control @error('Name') is-invalid @enderror" placeholder="Name">
-                        @error('Name')
-                        <div class="alert alert-danger ">{{ $message  }}</div>
-                        @enderror <br>
-                        <select class="form-control form-control-lg mt-3 @error('category_id') is-invalid @enderror" name="category_id" id="category_id">
-                            @foreach($categories as $cat)
-                                <option value="{{$cat->id}}">{{$cat->Name_kz}}</option>
-                            @endforeach
-                            @error('category_id')
-                            <div class="alert alert-danger ">{{ $message }}</div>
+                        @csrf
+                        <div  class="form-group">
+                            <input type="text" name="Name" class="form-control @error('Name') is-invalid @enderror" placeholder="Курстың аты">
+                            @error('Name')
+                            <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </select><br>
-                        <input type="text" name="Description" class="form-control @error('Description') is-invalid @enderror" placeholder="Description">
-                        @error('Description')
-                        <div class="alert alert-danger ">{{ $message }}</div>
-                        @enderror
-                        <br>
-                        <input name="Price" class="form-control @error('Price') is-invalid @enderror" placeholder="Price">
-                        @error('Price')
-                        <div class="alert alert-danger ">{{ $message }}</div>
-                        @enderror
-                        <br>
-                        <label for="imgInput" class="form-control">Wallpaper Image</label>
-                        <input type="file" class="form-control @error('img') is-invalid @enderror"  id="imgInput" name="Wallpaper">
-                        @error('Wallpaper')
-                        <div class="alert alert-danger">{{$message}}</div>
-                        @enderror
-                        <label for="videoInput" class="form-control">Course Video</label>
-                        <input type="file" class="form-control @error('Videos') is-invalid @enderror"  id="videosInput" name="Videos">
-                        @error('Videos')
-                        <div class="alert alert-danger">{{$message}}</div>
-                        @enderror
-                        <br>
-                        <label for="teacher">Автор</label>
-                        <select name="teacher_id" class="form-control">
-                            @foreach($teachers as $teacher)
-                                <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button class="btn btn-primary form-control"  style="margin-top: 20px"  type="submit">Save</button>
+                        </div>
+
+                        <div style="margin-top: 10px" class="form-group">
+                            <select class="form-control @error('category_id') is-invalid @enderror" name="category_id">
+                                <option value="" selected disabled>Санатты таңдаңыз:</option>
+                                @foreach($categories as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->Name_kz }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div style="margin-top: 10px" class="form-group">
+                            <textarea name="Description" class="form-control @error('Description') is-invalid @enderror" placeholder="Курстың сипаттамасы"></textarea>
+                            @error('Description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div style="margin-top: 10px" class="form-group">
+                            <input name="Price" class="form-control @error('Price') is-invalid @enderror" placeholder="Бағасы">
+                            @error('Price')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div style="margin-top: 10px" class="form-group">
+                            <label for="imgInput">Тұсқағаздағы сурет</label>
+                            <input type="file" class="form-control-file @error('Wallpaper') is-invalid @enderror" id="imgInput" name="Wallpaper">
+                            @error('Wallpaper')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div style="margin-top: 10px" class="form-group">
+                            <select hidden="teacher_id" name="teacher_id" class="form-control">
+                                @foreach($teachers as $teacher)
+                                    <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <button style="margin-top: 10px" class="btn btn-primary btn-block" type="submit">Сақтау</button>
+                    </form>
                 </div>
             </div>
         </div>
-
-    </form>
+    </div>
 @endsection

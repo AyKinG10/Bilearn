@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Course;
 use App\Models\Lesson;
+use App\Models\Paid;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +14,11 @@ use Illuminate\Support\Facades\Auth;
 class CourseController extends Controller
 {
 
-    public function favorites(){
+    public function favorites(Course $course){
         $fav=Auth::user()->coursesLiked()->get();
-
-        return view('courses.favorite',['courses'=>$fav,'categories'=>Category::all()]);
+        $isCreator = Auth::user()->id == $course->teacher_id;
+        $isPaid = $course->isPaid();
+        return view('courses.favorite',['courses'=>$fav,'isCreator'=>$isCreator,'isPaid'=>$isPaid]);
     }
     public function index()
     {
@@ -59,7 +61,16 @@ class CourseController extends Controller
         $teacher = User::where('id', '=', $course->teacher_id)->first();
         $lessons = Lesson::where('course_id', '=', $course->id)->get();
         $comments = Comment::where('course_id' ,'=', $course->id)->get();
-        return view('courses.show',['courses'=>$course,'comments'=>$comments,'lessons'=>$lessons,'lesson_id' => $lesson,'categories'=>Category::all(), 'teacher' => $teacher]);
+        $isCreator = Auth::user()->id == $course->teacher_id;
+        $isPaid = $course->isPaid();
+        return view('courses.show',['courses'=>$course,
+            'comments'=>$comments,
+            'lessons'=>$lessons,
+            'lesson_id' => $lesson,
+            'categories'=>Category::all(),
+            'teacher' => $teacher,
+            'isCreator' => $isCreator,
+            'isPaid'=>$isPaid]);
     }
 
 
@@ -88,7 +99,7 @@ class CourseController extends Controller
     }
     public function courseLike(Course $course)
     {
-        $likedCourse = Auth::user()->coursesLiked()->where('course_id', $course->id)->get();
+        $likedCourse = Auth::user()->coursesLiked()->where('course_id', $course->id)->first();
 
         if ($likedCourse != null) {
             Auth::user()->coursesLiked()->detach($course->id);
@@ -97,5 +108,35 @@ class CourseController extends Controller
         }
 
         return redirect(route('courses.favorite', $course->id));
+    }
+    public function buyCourse(Course $course)
+    {
+        return view('courses.bought',['courses'=>$course]);
+    }
+    public function purchase(Course $course)
+    {
+        $user = auth()->user();
+
+        if ($user->coursesPurchased()->where('course_id', $course->id)->exists()) {
+            return redirect()->route('courses.show', $course)->with('warning', 'Курс уже оплачен.');
+        }
+
+        Paid::create([
+            'user_id' => $user->id,
+            'course_id' => $course->id,
+            'status' => true,
+        ]);
+
+        return redirect()->route('courses.show', $course)->with('success', 'Курс успешно куплен!');
+    }
+
+    public function purchasedCourses(Course $course)
+    {
+        $user = auth()->user();
+        $purchasedCourses = $user->coursesPurchased()->get();
+        $isCreator = Auth::user()->id == $course->teacher_id;
+        $isPaid = $course->isPaid();
+        return view('courses.purchased', ['purchasedCourses' => $purchasedCourses,'isCreator' => $isCreator,
+            'isPaid'=>$isPaid]);
     }
 }

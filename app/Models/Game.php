@@ -10,4 +10,8 @@ class Game extends Model
     use HasFactory;
     protected $fillable = ['question', 'answer'];
 
+
+    public function user(){
+        return $this->belongsToMany(User::class);
+    }
 }

@@ -11,22 +11,22 @@ class CoursePolicy
 
     public function viewAny(User $user): bool
     {
-        return  ($user->role->name != 'teacher');
+        return  ($user->role->name == 'admin');
     }
 
     public function view(User $user): bool
     {
-        return  ($user->role->name == 'teacher');
+        return  ($user->role->name == 'user');
     }
 
     public function create(User $user): bool
     {
-        return  ($user->role->name == 'teacher');
+        return  ($user->role->name == 'teacher'|| $user->role->name == 'admin');
     }
 
     public function update(User $user, Course $course): bool
     {
-        return  ($user->role->name != 'teacher');
+        return  ($user->role->name == 'teacher' && 'admin');
     }
 
     /**

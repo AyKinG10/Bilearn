@@ -21,8 +21,9 @@ class ChatController extends Controller
             ->orderBy('created_at')
             ->get();
 
-        return view('courses.chat-index', compact('messages'));
+        return view('courses.chat-index', compact('messages', 'user'));
     }
+
 
     public function show(User $user)
     {

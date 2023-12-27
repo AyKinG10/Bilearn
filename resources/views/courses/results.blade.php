@@ -11,7 +11,7 @@
                     <div class="col-lg-6">
                         <div class="section-heading">
 
-                            <h2> Search Results</h2>
+                            <h2> Іздеу нәтижелері</h2>
                         </div>
                     </div>
                     <div class="col-lg-6">
